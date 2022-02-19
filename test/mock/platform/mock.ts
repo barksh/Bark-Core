@@ -5,8 +5,8 @@
  * @package Mock
  */
 
-import { BarkPlatform } from "../../../lib/platform";
-import { BarkPreference } from "../../../lib/preference";
+import { BarkPlatform } from "@barksh/platform";
+import { BarkPreference } from "@barksh/preference";
 
 export class MockPlatform extends BarkPlatform {
 
@@ -17,7 +17,10 @@ export class MockPlatform extends BarkPlatform {
     public constructor() {
 
         super();
-        this._preference = {};
+        this._preference = {
+
+            modules: [],
+        };
     }
 
     public get output(): BarkPreference {

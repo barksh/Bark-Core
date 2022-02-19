@@ -6,22 +6,22 @@
  */
 
 import { Sandbox } from "@sudoo/marked";
-import { BarkModule } from "../../../lib/module";
+import { BarkModule } from "@barksh/module";
 
 export class MockExampleModule extends BarkModule {
 
     public load(): void | Promise<void> {
 
-        this.config.io.write('Load');
+        this.io.write('Load');
     }
 
     public register(sandbox: Sandbox): void | Promise<void> {
 
-        this.config.io.write('Register');
+        this.io.write('Register');
 
         sandbox.provide('test', {
             execute: () => {
-                this.config.io.write('Execute');
+                this.io.write('Execute');
             },
         });
     }

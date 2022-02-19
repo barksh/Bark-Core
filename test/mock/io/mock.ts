@@ -5,7 +5,7 @@
  * @package Mock
  */
 
-import { BarkIO } from "../../../lib/io";
+import { BarkIO } from "@barksh/io";
 
 export class MockIO extends BarkIO {
 
