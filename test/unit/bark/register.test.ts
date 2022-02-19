@@ -8,7 +8,7 @@
 import { Sandbox } from '@sudoo/marked';
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { Bark } from '../../../src/bark';
+import { Bark } from '../../../src';
 import { MockIO } from '../../mock/io/mock';
 import { MockExampleModule } from '../../mock/module/example';
 import { MockPlatform } from '../../mock/platform/mock';
