@@ -7,7 +7,7 @@
 import { BarkIO } from "@barksh/io";
 import { BarkModule } from "@barksh/module";
 import { BarkPlatform } from "@barksh/platform";
-import { Sandbox } from "@sudoo/marked";
+import { END_SIGNAL, MarkedResult, Sandbox } from "@sudoo/marked";
 import { createSandbox } from "./sandbox/sandbox";
 
 export class Bark {
@@ -34,6 +34,26 @@ export class Bark {
         await Promise.resolve(instance.load());
 
         this._modules.add(instance);
+    }
+
+    public async executeScript(script: string): Promise<boolean> {
+
+        const sandbox: Sandbox = await this.createSandbox();
+        const result: MarkedResult = await sandbox.evaluate(script);
+
+        if (result.signal === END_SIGNAL.FAILED) {
+
+            this._io.writeError(result.error.description);
+            return false;
+        }
+
+        if (result.signal === END_SIGNAL.EXCEPTION) {
+
+            this._io.writeError(result.exception.description);
+            return false;
+        }
+
+        return result.signal === END_SIGNAL.SUCCEED;
     }
 
     public async createSandbox(): Promise<Sandbox> {
